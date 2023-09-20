@@ -27,39 +27,62 @@ Output:2
 
 def ArrayJumping(arr):
     
-    ht = {}
-    max_index = arr.index(max(arr))
-    L = len(arr)    
+    ht = {}     # hash table
+    max_index = arr.index(max(arr)) # Letak nilai terbesar dalam array
+    print("max_index :", max_index)
+    L = len(arr)        # panjang array
     
-    for i in range(L):
-        ht[i] = (left(L,i,arr[i]),right(L,i,arr[i]))
-        
+    for i in range(L):      # iterable i dari panjang L dimulai dari 0 < L
+        print("This is L(length) variable : ", L)
+        print("This is i(index) variable : ", i)
+        print("This is arr[i](number) variable : ", arr[i])
+        ht[i] = (left(L,i,arr[i]),right(L,i,arr[i]))    # Inisialisasi variable 2 digit
+        print("This is ht[i] : ", ht[i])
+        print("-----------------")
+
     if max_index in ht[max_index]:
+        print("max_index : ", max_index)
+        print("ht[max_index] : ", ht[max_index])
         return 1
-    
+    # print("-----------------")
     travel_set = set(ht[max_index])  
+    print("Travel_set : ", travel_set)
     
     for step in range(2,L+1):
+        print("Step variable : ", step)
         for val in tuple(travel_set):
+            print("val variable : ", val)
             travel_set.add(ht[val][0])
             travel_set.add(ht[val][1])
+        print("Travel_set_finale : ", travel_set)
         if max_index in travel_set:
             return step
     return -1
         
 
 def left(length,index,number):
-    left = number % length
-    if left > index:
-        left = length + index - left
+    left = number % length      # inisialisasi variable left, number modulo panjang karakter
+    print("This is left variable : ", left) 
+    if left > index:            # jika varialbe left > index maka panjang + index - kiri
+        result = length + index - left
     else:
-        left = index - left
-    return left
+        result = index - left
+    print("result of left function ", result)
+    return result
 
 def right(length,index,number):
     right = number % length
+    print("This is right variable : ", right)
     if right > length - index - 1:
-        right = right + index - length
+        result = right + index - length
     else:
-        right = right + index
-    return right
+        result = right + index
+    print("result of right function ", result)
+    return result
+
+# print("This information that contain in this code are: ", ArrayJumping([9, 5, 0, 0, 0, 6]))
+print("This information that contain in this code are: ",
+      ArrayJumping([0, 2, 1, 2, 0, 0]))
+# print("This information that contain in this code are: ",
+#       ArrayJumping([1, 7, 1, 9, 4, 5]))
+# print("This information that contain in this code are: ", ArrayJumping([1, 2, 1, 4]))
